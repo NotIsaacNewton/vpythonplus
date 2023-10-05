@@ -5,17 +5,13 @@ Created on Sun Oct 31 17:45:27 2021
 
 @author: ariandovald
 """
-from vpython import *
-from vpythonplus import Sphere
+from vpythonplus import *
 
-planet1 = Sphere(pos=vec(0, 0, 0), mass=1000, radius=0.1, make_trail=True)
-planet2 = Sphere(pos=vec(1, 0, 0), mass=1000, radius=0.1, vel=vec(0, 0.00025, 0), make_trail=True)
-planet3 = Sphere(pos=vec(0, -1, 0), mass=1000, radius=0.1, vel=vec(0, 0, 0.00025), make_trail=True)
+universe = Universe(solver="verlet", dt=0.000005, sound=False)
 
-while planet1.t < 1000000:
-    planet1.gravity()
-    planet2.gravity()
-    planet3.gravity()
-    planet1.move()
-    planet2.move()
-    planet3.move()
+body1 = Sphere(universe, mass=12*10**12, radius=0.1, pos=vec(0, 0, 0),
+               vel=vec(-14, 14, 0), make_trail=True, trail_radius=0.01)
+body2 = Sphere(universe, mass=12*10**12, radius=0.1, pos=vec(1, 0, 0),
+               vel=vec(0, -28, 0), make_trail=True, trail_radius=0.01)
+
+universe.start(time=0.000)
